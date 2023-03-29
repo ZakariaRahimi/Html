@@ -74,8 +74,13 @@
 //     return f.includes('wi');
 // })
 
-const num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const word = ['some','again','try','going','sort','trust','gorgeous','agreculture','thing'];
-const letnum = num.filter(n =>(n%2==0))      // this code is working
+// const num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// const word = ['some','again','try','going','sort','trust','gorgeous','agreculture','thing'];
+// const letnum = num.filter(n =>(n%2==0))      // this code is working
 
-const letword = word.filter(w=>(w.toString().concat('something')));  // this code is outputing unexpected result
+// const letword = word.filter(w=>(w.toString().concat('something')));  // this code is outputing unexpected result
+
+const arr = ['the main point','world of the game','live of the boy'];
+const result = arr.filter(r =>{
+    return r.toUpperCase().includes(boy);
+})
