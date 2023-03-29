@@ -80,7 +80,7 @@
 
 // const letword = word.filter(w=>(w.toString().concat('something')));  // this code is outputing unexpected result
 
-const arr = ['the main point','world of the game','live of the boy'];
+const arr = ['the main point','world of the game','live of the people'];
 const result = arr.filter(r =>{
-    return r.toUpperCase().includes(boy);
+    return r.toUpperCase().includes('the');
 })
