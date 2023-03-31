@@ -80,7 +80,16 @@
 
 // const letword = word.filter(w=>(w.toString().concat('something')));  // this code is outputing unexpected result
 
-const arr = ['the main point','world of the game','live of the people'];
-const result = arr.filter(r =>{
-    return r.includes('the');
-})
+// const arr = ['the main point','world of the game','live of the people'];
+// const result = arr.filter(r =>{
+//     return r.includes('the');
+// })
+
+
+const arr = ['fruits','apples','beries'];
+const hasLenth = arr.every(e => e.length===6);
+
+const hasS = arr.every(l=>{
+    const last = l.length -1;
+    return l[last] === 's'
+});
