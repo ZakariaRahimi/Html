@@ -94,14 +94,33 @@
 //     return l[last] === 's'
 // });
 
+// const arr = ['fruits','peach','beries'];
+// const hasLenth = arr.some(e => e.length===6);
+
+// const hasS = arr.some(l=>{
+//     const last = l.length -1;
+//     return l[last] === 's'
+// });
+
 const arr = ['fruits','peach','beries'];
-const hasLenth = arr.some(e => e.length===6);
 
-const hasS = arr.some(l=>{
-    const last = l.length -1;
-    return l[last] === 's'
-});
+const sort1 = arr.sort();
 
+const sort2 = arr.slice().sort();
+
+const num = [0,61,27,433,49,95,69,97,98,99,340,200,400,3000];
+
+const numSort = num.sort();
+
+const numSortAsc = num.sort((a, b)=> a - b);
+
+const numSortDesc = num.sort((a, b)=> b - a);
+
+const numSortSlice = num.slice().sort();
+
+const numSortAscSlice = num.slice().sort((a, b)=> a - b);
+
+const numSortDescSlice = num.slice().sort((a, b)=> b - a);
 
 
 
