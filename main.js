@@ -82,5 +82,5 @@
 
 const arr = ['the main point','world of the game','live of the people'];
 const result = arr.filter(r =>{
-    return r.toUpperCase().includes('the');
+    return r.includes('the');
 })
