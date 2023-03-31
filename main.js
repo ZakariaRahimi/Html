@@ -86,10 +86,23 @@
 // })
 
 
-const arr = ['fruits','apples','beries'];
-const hasLenth = arr.every(e => e.length===6);
+// const arr = ['fruits','apples','beries'];
+// const hasLenth = arr.every(e => e.length===6);
 
-const hasS = arr.every(l=>{
+// const hasS = arr.every(l=>{
+//     const last = l.length -1;
+//     return l[last] === 's'
+// });
+
+const arr = ['fruits','peach','beries'];
+const hasLenth = arr.some(e => e.length===6);
+
+const hasS = arr.some(l=>{
     const last = l.length -1;
     return l[last] === 's'
 });
+
+
+
+
+
