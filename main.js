@@ -1,145 +1,96 @@
-// const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-// const fin = arr.map(function (a) {
-//     return {
-//         value: a,
-//         isEven: a % 2 === 0,
-//         con: function (isEven) {
-//             if (isEven) {
-//                 console.log("Even");
-//             } else {
-//                 console.log("Odd");
-//             }
-//         }
-//     }
-// });
+const calculatorScreen = document.querySelector('.calculator-screen');
+const calculatorKeys = document.querySelector('.calculator-keys');
+let firstOperand = null;
+let operator = null;
+let waitingForSecondOperand = false;
 
-//                                     // remained not successful
-// const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-// const dbl = arr.map(function (a) {
-//     return a;
-// });
+const handleInput = (event) => {
+  const { target: { value } } = event;
+  const { screenValue, isOperator } = getScreenValueAndCheckIfIsOperator(value);
+  calculatorScreen.value = screenValue;
+  if (isOperator) {
+    handleOperator(value);
+  } else {
+    handleNumber(value);
+  }
+};
 
-// const dbl2 = [];
-// for(arrayof in arr){
-//     dbl2.push(arrayof *2);
-// }
+const getScreenValueAndCheckIfIsOperator = (value) => {
+  const screenValue = calculatorScreen.value;
+  const isOperator = !!value.match(/[*+\-/]/);
+  return { screenValue, isOperator };
+};
 
-// const dbl3 = arr.map(function (y){
-//     return y * 3;
-// }
-// );
+const handleOperator = (value) => {
+  const lastScreenValue = calculatorScreen.value.slice(-1);
+  if (lastScreenValue === '') {
+    return;
+  }
+  if (waitingForSecondOperand) {
+    operator = value;
+    return;
+  }
+  if (firstOperand === null) {
+    firstOperand = Number(calculatorScreen.value);
+  } else {
+    const secondOperand = Number(calculatorScreen.value);
+    calculate(firstOperand, secondOperand, operator);
+    firstOperand = result;
+  }
+  waitingForSecondOperand = true;
+  operator = value;
+};
 
-//  value = ()=>{
-//     return 'something' 
-// }
+const handleNumber = (value) => {
+  if (waitingForSecondOperand) {
+    calculatorScreen.value = '';
+    waitingForSecondOperand = false;
+  }
+  calculatorScreen.value += value;
+};
 
-// const tryit = ()=> {
-//     return "Try Again";
-// }
+const calculate = (firstOperand, secondOperand, operator) => {
+  switch (operator) {
+    case '+':
+      result = firstOperand + secondOperand;
+      break;
+    case '-':
+      result = firstOperand - secondOperand;
+      break;
+    case '*':
+      result = firstOperand * secondOperand;
+      break;
+    case '/':
+      result = firstOperand / secondOperand;
+      break;
+    default:
+      result = null;
+      break;
+  }
+  calculatorScreen.value = result;
+};
 
-// const come = (x,y)=>{
-//     if (x >= y){
-//         return `x is Greater`
-//     }else{
-//         return 'y is greater'
-//     }
-// }
+const resetCalculator = () => {
+  calculatorScreen.value = '';
+  firstOperand = null;
+  operator = null;
+  waitingForSecondOperand = false;
+};
 
-// const square = x =>{
-//     return x;
-// }
+calculatorKeys.addEventListener('click', handleInput);
 
-// const square = (n)=> n*n;   // Implicit Return
-
-
-// const triple = (n) =>(       // Implicit Return (We Only Can to return one thing like one expression  )
-//     n*n*n
-// )
-
-// const come = (x,y)=>(
-//     if (x >= y){
-//         return `x is Greater`      // this code is Error because it has more returns not only one expression
-//     }else{
-//         return 'y is greater'
-//     }
-// )
-
-// const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-// const triple = arr.map(n => n*3)
-
-
-// const arr = ['try','wish','get','wind'];
-// const getit = arr.find(f =>{
-//     return f.includes('wi');
-// })
-
-// const num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-// const word = ['some','again','try','going','sort','trust','gorgeous','agreculture','thing'];
-// const letnum = num.filter(n =>(n%2==0))      // this code is working
-
-// const letword = word.filter(w=>(w.toString().concat('something')));  // this code is outputing unexpected result
-
-// const arr = ['the main point','world of the game','live of the people'];
-// const result = arr.filter(r =>{
-//     return r.includes('the');
-// })
-
-
-// const arr = ['fruits','apples','beries'];
-// const hasLenth = arr.every(e => e.length===6);
-
-// const hasS = arr.every(l=>{
-//     const last = l.length -1;
-//     return l[last] === 's'
-// });
-
-// const arr = ['fruits','peach','beries'];
-// const hasLenth = arr.some(e => e.length===6);
-
-// const hasS = arr.some(l=>{
-//     const last = l.length -1;
-//     return l[last] === 's'
-// });
-
-// const arr = ['fruits','peach','beries'];
-
-// const sort1 = arr.sort();
-
-// const sort2 = arr.slice().sort();
-
-// const num = [0,61,27,433,49,95,69,97,98,99,340,200,400,3000];
-
-// const numSort = num.sort();
-
-// const numSortAsc = num.sort((a, b)=> a - b);
-
-// const numSortDesc = num.sort((a, b)=> b - a);
-
-// const numSortSlice = num.slice().sort();
-
-// const numSortAscSlice = num.slice().sort((a, b)=> a - b);
-
-// const numSortDescSlice = num.slice().sort((a, b)=> b - a);
-
-const num = [0,6,7,3,9,5,6,7,9,9,4,2,40,30];
-
-const maxNum = num.reduce((max, current)=>{
-    if(current >max) return current;             // Maximum Value
-    return max;
+document.addEventListener('keydown', (event) => {
+  const { key } = event;
+  if (/^[0-9+\-*/.]$/.test(key)) {
+    const button = calculatorKeys.querySelector(`[value="${key}"]`);
+    if (button) button.click();
+  } else if (key === 'Enter' || key === '=') {
+    const button = calculatorKeys.querySelector('.equal');
+    if (button) button.click();
+  } else if (key === 'Escape') {
+    resetCalculator();
+  } else if (key === 'Backspace') {
+    calculatorScreen.value = calculatorScreen.value.slice(0, -1);
+  }
 });
-
-const minNum = num.reduce((min, current)=>{
-    if(current < min) return current;             // Minimum Value
-    return min;
-});
-
-
-const maximum = num.reduce((max, cur)=>{
-    return Math.max(max, cur);                   // Maximum Value bye Buit-in Method
-})
-
-const minimum = num.reduce((min, cur)=>{
-    return Math.min(min, cur);                  // Minimun Value bye Built-in Mothod
-})
-
 
